@@ -1,0 +1,25 @@
+{
+  "name": "download",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest --watchAll"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.0.2",
+    "jest": "^23.6.0",
+    "loadash": "^1.0.0",
+    "loadsh": "0.0.3",
+    "mongoose": "^5.3.12"
+  },
+  "devDependencies": {
+    "mongodb-memory-server": "^2.7.2",
+    "nodemon": "^1.18.6"
+  }
+}
