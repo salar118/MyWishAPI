@@ -3,7 +3,7 @@ services:
   - docker
 
 before_install
-  - docker build -t salar118/mywish-backend -f Dockerfile .
+  - docker build -t salar118/MyWishAPI -f Dockerfile .
 
 script:
-  - docker run salar118/mywish-backend npm test -- --coverage
+  - docker run salar118/MyWishAPI npm test -- --coverage
