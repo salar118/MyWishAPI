@@ -1,7 +1,7 @@
 sudo: required 
 
 env:
-  - NODE_ENV=test
+  - NODE_ENV=production
 
 services:
   - docker
