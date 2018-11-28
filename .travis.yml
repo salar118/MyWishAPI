@@ -1,4 +1,8 @@
 sudo: required 
+
+env:
+  - NODE_ENV=development
+
 services:
   - docker
 
