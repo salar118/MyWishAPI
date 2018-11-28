@@ -13,7 +13,7 @@ beforeAll(async () => {
     debug: true
   });
   const mongoUri = await mongoServer.getConnectionString();
-  await mongoose.connect(mongoUri, opts, (err) => {
+  const connect = await mongoose.connect(mongoUri, opts, (err) => {
     if (err) console.error(err);
   });
 });
