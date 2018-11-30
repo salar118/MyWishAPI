@@ -1,4 +1,4 @@
-const Wish = require("../../../features/wish/wish");
+const Wish = require("../../../features/wish/model");
 const mongoose = require('mongoose');
 const MongoMemoryServer = require('mongodb-memory-server').default;
 
@@ -13,7 +13,7 @@ beforeAll(async () => {
     debug: true
   });
   const mongoUri = await mongoServer.getConnectionString();
-  const connect = await mongoose.connect(mongoUri, opts, (err) => {
+  await mongoose.connect(mongoUri, opts, (err) => {
     if (err) console.error(err);
   });
 });

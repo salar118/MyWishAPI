@@ -1,5 +1,5 @@
 const graphql = require('graphql');
-const _ = require('loadsh');
+const wishFeature = require('../../features/wish/');
 
 const {
     GraphQLSchema,
@@ -21,13 +21,16 @@ const WishType = new GraphQLObjectType({
     }
 });
 
-const wishes = [{
-    title: '1',
-    story: "first story"
-}, {
-    title: '2',
-    story: 'second story'
-}];
+// const w = wishFeature.queries.createWish();
+
+// const wishes = [{
+//     title: '1',
+//     story: "first story"
+// }, {
+//     title: '2',
+//     story: 'second story'
+// }];
+
 
 //Root query for exposing wishes
 const RootQuery = new GraphQLObjectType({
@@ -40,10 +43,9 @@ const RootQuery = new GraphQLObjectType({
                     type: GraphQLString
                 }
             },
-            resolve(parentValue, {
-                title
-            }) {
-                return wishes[1];
+            resolve: async (parent, {}, context, info) => {
+                const result = await wishFeature.queries.findWish();
+                return result[0];
             }
         }
     }

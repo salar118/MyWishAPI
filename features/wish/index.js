@@ -3,9 +3,6 @@ var mongoose = require('mongoose');
 var express = require('express');
 var router = express.Router();
 
-var Wish = require("./wish");
-
-
 const {
     mongodb_host,
     mongodb_port
@@ -23,17 +20,17 @@ mongoose
     .catch(err => console.log(err));
 
 
-const newWish = new Wish({
-    title: 'title wish sd ',
-    story: 'story of wish'
-});
-
-newWish.save();
-
+const wishQueries = require('./query');
+const wishValidate = require('./validate');
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
-    res.send('respond of wishs');
-});
+// router.get('/', function (req, res, next) {
+//     res.send('respond of wishs');
+// });
 
-module.exports = router;
+// module.exports = router;
+
+module.exports = {
+    queries: wishQueries,
+    validate: wishValidate
+}

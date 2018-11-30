@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-// DB schema
 const wishSchema = new mongoose.Schema({
     title: {
         type: String,
