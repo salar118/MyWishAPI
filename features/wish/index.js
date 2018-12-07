@@ -23,14 +23,7 @@ mongoose
 const wishQueries = require('./query');
 const wishValidate = require('./validate');
 
-/* GET users listing. */
-// router.get('/', function (req, res, next) {
-//     res.send('respond of wishs');
-// });
-
-// module.exports = router;
-
 module.exports = {
     queries: wishQueries,
     validate: wishValidate
-}
+};

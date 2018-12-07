@@ -5,7 +5,8 @@ const {
     GraphQLSchema,
     GraphQLObjectType,
     GraphQLString,
-    RootQueryType
+    RootQueryType,
+    GraphQLInputObjectType
 
 } = graphql;
 
@@ -21,17 +22,6 @@ const WishType = new GraphQLObjectType({
     }
 });
 
-// const w = wishFeature.queries.createWish();
-
-// const wishes = [{
-//     title: '1',
-//     story: "first story"
-// }, {
-//     title: '2',
-//     story: 'second story'
-// }];
-
-
 //Root query for exposing wishes
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
@@ -44,13 +34,68 @@ const RootQuery = new GraphQLObjectType({
                 }
             },
             resolve: async (parent, {}, context, info) => {
-                const result = await wishFeature.queries.findWish();
+                const result = await wishFeature.queries.createWish({
+                    title: 'wish',
+                    story: 'Story of wish'
+                });
                 return result[0];
             }
         }
     }
 });
 
+const wishInput = new GraphQLInputObjectType({
+    name: "WishInput",
+    fields: () => ({
+        title: {
+            type: GraphQLString
+        },
+        story: {
+            type: GraphQLString
+        }
+    })
+});
+
+const mutationType = new GraphQLObjectType({
+    name: "WishMutationType",
+    fields: {
+        findWish: {
+            type: WishType,
+            args: {
+                wishInput: {
+                    type: wishInput
+                }
+            },
+            resolve: async (parent, {
+                wishInput
+            }, context, info) => {
+                const result = await wishFeature.queries.findWish({
+                    title: wishInput.title
+                });
+                return result[0];
+            }
+        },
+        createWish: {
+            type: WishType,
+            args: {
+                wishInput: {
+                    type: wishInput
+                }
+            },
+            resolve: async (parent, {
+                wishInput
+            }, context, info) => {
+                const result = await wishFeature.queries.createWish({
+                    title: wishInput.title,
+                    story: wishInput.story
+                });
+                return result;
+            }
+        }
+    }
+});
+
 module.exports = new GraphQLSchema({
-    query: RootQuery
+    query: RootQuery,
+    mutation: mutationType
 });

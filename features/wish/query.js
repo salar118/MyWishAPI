@@ -1,20 +1,38 @@
 var Wish = require("./model");
 
-async function createWish() {
+/**
+ * 
+ * @param {title of wish} title
+ * @param {story of wish} story
+ *  
+ */
+function createWish({
+    title,
+    story
+}) {
     const wish = new Wish({
-        title: 'title wish sd ' + Math.random(),
-        story: 'story of wish'
+        title: title + Math.random(),
+        story: story
     });
 
-    const createdWish = await wish.save();
-    return createWish;
+    const createdWish = wish.save();
+    return createdWish;
 }
 
-async function findWish() {
-    return await Wish.find();
+/**
+ * Finding wish by using:
+ * 
+ * @param {String} Title 
+ */
+function findWish({
+    title
+}) {
+    return Wish.find({
+        title
+    });
 }
 
 module.exports = {
     createWish,
     findWish
-}
+};
